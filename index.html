@@ -633,7 +633,7 @@ const I18N = {
     label_buy: 'Initial Buy (Optional)', label_fee: 'Launch Fee',
     label_website: 'Website', label_x: 'X (Twitter)', label_tg: 'Telegram',
     btn_create: 'Launch Token',
-    btn_tax: 'Set Tax',
+    btn_slippage: 'Set Slippage',
     launch_hint: 'Your token will be created on a bonding curve and tradeable immediately. Once the market cap reaches $69K, liquidity is automatically deposited to the DEX.',
     label_tokens: 'Tokens', label_value: 'Value', label_trades: 'Trades', label_earned: 'Earned',
     my_portfolio: 'My Portfolio', created_tokens: 'Created Tokens', tx_history: 'Transaction History',
@@ -662,7 +662,7 @@ const I18N = {
     label_buy: '初始购买（可选）', label_fee: '发射费用',
     label_website: '官网', label_x: 'X (Twitter)', label_tg: 'Telegram',
     btn_create: '发射代币',
-    btn_tax: '设置税收',
+    btn_slippage: '设置滑点',
     launch_hint: '你的代币将通过Bonding Curve创建并立即可交易。市值达到$69K时，流动性将自动存入DEX。',
     label_tokens: '代币', label_value: '价值', label_trades: '交易', label_earned: '收益',
     my_portfolio: '我的持仓', created_tokens: '创建的代币', tx_history: '交易记录',
@@ -903,7 +903,7 @@ document.getElementById('detailMain').innerHTML = `
       <div class="progress-labels"><span>$${fmtN(t.mc)}</span><span>$69K</span></div>
     </div>
     <button class="btn btn-accent" style="width:100%;margin-top:16px;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button>
-    <button class="btn btn-ghost" style="width:100%;margin-top:8px;padding:12px;font-size:13px;" onclick="alert('Tax settings coming soon')" data-i18n="btn_tax">设置税收</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px;padding:12px;font-size:13px;" onclick="alert('Slippage settings coming soon')" data-i18n="btn_slippage">设置滑点</button>
   </div>
 </div>
 
