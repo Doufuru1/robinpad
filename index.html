@@ -320,6 +320,15 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .page-btn:disabled { opacity:0.4; cursor:not-allowed; border-color:var(--border); color:var(--dim2); }
 .page-dots { color:var(--dim2); font-size:13px; font-weight:700; padding:0 4px; }
 
+/* Slippage Popup */
+.slippage-popup { position:absolute; top:40px; left:0; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:16px; width:220px; z-index:100; display:none; box-shadow:0 8px 32px rgba(0,0,0,0.5); }
+.slippage-popup.show { display:block; }
+.slippage-title { font-size:13px; font-weight:700; color:var(--dim); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px; }
+.slippage-options { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.slippage-opt { padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-size:13px; font-weight:700; cursor:pointer; text-align:center; transition:0.2s; }
+.slippage-opt:hover { border-color:var(--accent); }
+.slippage-opt.active { background:var(--accent); color:#000; border-color:var(--accent); }
+
 /* Footer */
 .site-footer { border-top:1px solid var(--border); background:var(--bg); padding:48px 24px 24px; margin-top:24px; }
 .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; gap:48px; flex-wrap:wrap; }
@@ -732,6 +741,7 @@ const TOKENS = [
 let selected = TOKENS[0], chartInst = null, isBuy = true, connected = false, addr = '';
 let myPortfolio = [], myCreated = [], myTxs = [], myRefs = [];
 let homeTab = 'trending', homePage = 1, homePerPage = 8;
+let slippage = 1.5;
 
 function genChart(n, cur) { const d=[]; let p=cur*0.5; for(let i=0;i<n;i++){ p+=(Math.random()-0.4)*p*0.1; if(p<cur*0.1)p=cur*0.1; d.push(p);} d[d.length-1]=cur; return d; }
 function miniChart(d, up) { const w=60,h=30, mx=Math.max(...d), mn=Math.min(...d), r=mx-mn||1; const pts=d.map((v,i)=>`${(i/(d.length-1))*w},${h-((v-mn)/r)*h}`).join(' '); return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${up?'var(--green)':'var(--red)'}" stroke-width="1.5" stroke-linecap="round"/></svg>`; }
@@ -890,10 +900,10 @@ document.getElementById('detailMain').innerHTML = `
         <button class="pct-btn" onclick="setPct(1)">MAX</button>
       </div>
     </div>
-    <div class="trade-hint">Balance: 2.45 ETH</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;position:relative;"><button class="btn btn-ghost" style="width:28px;height:28px;padding:0;display:flex;align-items:center;justify-content:center;font-size:14px;border-radius:6px;border:none;background:transparent;color:var(--dim);" onclick="toggleSlippage()" title="Set Slippage">⚙️</button><div class="slippage-popup" id="slippagePopup"><div class="slippage-title">Slippage</div><div class="slippage-options"><button class="slippage-opt" data-val="0.5" onclick="setSlippage(0.5)">0.5%</button><button class="slippage-opt" data-val="1" onclick="setSlippage(1)">1%</button><button class="slippage-opt" data-val="2" onclick="setSlippage(2)">2%</button><button class="slippage-opt" data-val="3" onclick="setSlippage(3)">3%</button></div></div><div class="trade-hint">Balance: 2.45 ETH</div></div>
     <div class="trade-info">
       <div class="trade-info-row"><span class="trade-info-label">Price</span><span class="trade-info-val">$${fmtP(t.price)}</span></div>
-      <div class="trade-info-row"><span class="trade-info-label">Slippage</span><span class="trade-info-val">1.5%</span></div>
+      <div class="trade-info-row"><span class="trade-info-label">Slippage</span><span class="trade-info-val" id="slippageVal">${slippage}%</span></div>
       <div class="trade-info-row"><span class="trade-info-label">Fee</span><span class="trade-info-val">0.5%</span></div>
       <div class="trade-info-row"><span class="trade-info-label">Total</span><span class="trade-info-val accent">$0.00</span></div>
     </div>
@@ -903,7 +913,6 @@ document.getElementById('detailMain').innerHTML = `
       <div class="progress-labels"><span>$${fmtN(t.mc)}</span><span>$69K</span></div>
     </div>
     <div style="display:flex;gap:8px;margin-top:16px;">
-      <button class="btn btn-ghost" style="width:48px;min-width:48px;height:48px;padding:0;display:flex;align-items:center;justify-content:center;font-size:18px;" onclick="alert('Slippage settings coming soon')" title="Set Slippage">⚙️</button>
       <button class="btn btn-accent" style="flex:1;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button>
     </div>
   </div>
@@ -956,6 +965,32 @@ function setBuy(b){
 }
 
 function setPct(pct) { document.getElementById('tradeAmt').value = (2.45 * pct).toFixed(4); }
+
+function toggleSlippage() {
+  const popup = document.getElementById('slippagePopup');
+  if (!popup) return;
+  popup.classList.toggle('show');
+  if (popup.classList.contains('show')) {
+    document.querySelectorAll('.slippage-opt').forEach(btn => {
+      btn.classList.toggle('active', parseFloat(btn.dataset.val) === slippage);
+    });
+  }
+}
+
+function setSlippage(val) {
+  slippage = val;
+  const popup = document.getElementById('slippagePopup');
+  if (popup) popup.classList.remove('show');
+  const display = document.getElementById('slippageVal');
+  if (display) display.textContent = slippage + '%';
+}
+
+document.addEventListener('click', e => {
+  const popup = document.getElementById('slippagePopup');
+  if (popup && popup.classList.contains('show') && !e.target.closest('.slippage-popup') && !e.target.closest('[onclick*="toggleSlippage"]')) {
+    popup.classList.remove('show');
+  }
+});
 
 function scrollTrade() { }
 function trade(){const a=document.getElementById('tradeAmt').value;if(!a||a<=0){alert('Enter amount');return;}const v=(parseFloat(a)*selected.price*2300).toFixed(2),tm='just now';myTxs.unshift({type:isBuy?'buy':'sell',token:selected.symbol,amt:(isBuy?'+':'-')+a+' ETH',val:'$'+v,tm});if(connected){const ex=myPortfolio.find(p=>p.t.id===selected.id);if(ex){ex.amt+=isBuy?parseFloat(a):-parseFloat(a);if(ex.amt<=0)myPortfolio=myPortfolio.filter(p=>p.t.id!==selected.id);}else if(isBuy)myPortfolio.push({t:selected,amt:parseFloat(a),val:parseFloat(v)});}alert(`${isBuy?'Bought':'Sold'} ${a} ETH of $${selected.symbol}`);renderProfile();}
