@@ -154,11 +154,11 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .tlist-price-val { font-size:16px; font-weight:800; }
 .tlist-change { font-size:13px; font-weight:700; }
 
-/* Token Detail */
+/* Token Detail - NEW Layout */
 .detail-layout { display:flex; height:calc(100vh - 100px); }
-.detail-sidebar { width:320px; min-width:320px; border-right:1px solid var(--border); overflow-y:auto; background:var(--bg); }
+.detail-sidebar { width:300px; min-width:300px; border-right:1px solid var(--border); overflow-y:auto; background:var(--bg); }
 .detail-main { flex:1; overflow-y:auto; background:var(--bg); display:flex; flex-direction:column; }
-.sidebar-header { padding:16px 20px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:10; font-size:12px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; }
+.sidebar-header { padding:12px 20px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:10; font-size:12px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; }
 .sidebar-item { padding:12px 20px; border-bottom:1px solid var(--border); cursor:pointer; transition:0.15s; display:flex; align-items:center; gap:12px; }
 .sidebar-item:hover { background:var(--bg3); }
 .sidebar-item.active { border-left:3px solid var(--accent); background:var(--bg2); }
@@ -169,81 +169,124 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .sidebar-price { text-align:right; }
 .sidebar-pval { font-size:14px; font-weight:700; }
 
-.detail-header { padding:24px 32px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:16px; }
-.detail-img { width:64px; height:64px; border-radius:16px; object-fit:cover; border:2px solid var(--border); }
-.detail-title { flex:1; }
-.detail-name { font-size:28px; font-weight:800; margin-bottom:4px; display:flex; align-items:center; gap:10px; }
-.detail-badge { background:var(--accent); color:#000; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700; }
-.detail-symbol { font-size:14px; color:var(--dim); }
+/* Detail Header */
+.detail-header { padding:20px 32px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:16px; }
+.detail-header .detail-img { width:48px; height:48px; border-radius:14px; object-fit:cover; border:2px solid var(--border); }
+.detail-header-info { flex:1; min-width:0; }
+.detail-header-top { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.detail-name { font-size:22px; font-weight:800; }
+.detail-badge { background:var(--accent); color:#000; padding:3px 8px; border-radius:6px; font-size:11px; font-weight:700; }
+.detail-symbol { font-size:13px; color:var(--dim); font-weight:600; }
+.detail-desc { font-size:13px; color:var(--dim); margin-top:2px; }
+.detail-header-price { text-align:right; min-width:140px; }
+.detail-price-big { font-size:28px; font-weight:800; }
+.detail-change-big { font-size:14px; font-weight:700; }
+.detail-created { font-size:12px; color:var(--dim2); margin-top:2px; }
 
-.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-bottom:1px solid var(--border); }
-.stat-box { background:var(--bg); padding:16px 24px; }
-.stat-label { font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-.stat-value { font-size:20px; font-weight:700; }
+/* Stats Row - Card Style */
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; padding:16px 32px; border-bottom:1px solid var(--border); background:var(--bg); }
+.stat-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 16px; }
+.stat-label { font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; font-weight:600; }
+.stat-value { font-size:18px; font-weight:700; }
 .stat-value.accent { color:var(--accent); }
 
-.detail-body { display:flex; flex:1; gap:1px; background:var(--border); }
-.chart-area { flex:1; background:var(--bg); padding:24px 32px; display:flex; flex-direction:column; }
+/* Detail Body: Chart + Trade */
+.detail-body { display:flex; flex:1; gap:0; background:var(--bg); border-bottom:1px solid var(--border); }
+.chart-area { flex:1; min-width:0; background:var(--bg); padding:24px 32px; display:flex; flex-direction:column; }
 .chart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-.chart-price { font-size:36px; font-weight:800; }
-.chart-change { font-size:16px; font-weight:700; }
+.chart-price { font-size:32px; font-weight:800; }
+.chart-change { font-size:14px; font-weight:700; padding:4px 10px; border-radius:6px; }
+.chart-change.up { background:rgba(0,230,118,0.1); color:var(--green); }
+.chart-change.down { background:rgba(255,23,68,0.1); color:var(--red); }
 .timeframes { display:flex; gap:4px; }
 .tframe { padding:6px 14px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; border:none; background:transparent; color:var(--dim); font-family:inherit; }
+.tframe:hover { color:var(--text); }
 .tframe.active { background:var(--accent); color:#000; }
-.chart-wrap { flex:1; min-height:300px; position:relative; }
+.chart-wrap { flex:1; min-height:280px; position:relative; }
 
-.trade-panel { width:340px; min-width:340px; background:var(--bg); padding:24px; display:flex; flex-direction:column; gap:16px; }
-.trade-tabs { display:flex; background:var(--bg2); border-radius:10px; padding:4px; gap:4px; }
-.trade-tab { flex:1; padding:10px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; border:none; background:transparent; color:var(--dim); font-family:inherit; }
+.trade-panel { width:360px; min-width:360px; background:var(--bg2); border-left:1px solid var(--border); padding:24px; display:flex; flex-direction:column; gap:16px; }
+.trade-tabs { display:flex; background:var(--bg3); border-radius:10px; padding:4px; gap:4px; }
+.trade-tab { flex:1; padding:10px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; border:none; background:transparent; color:var(--dim); font-family:inherit; transition:0.2s; }
+.trade-tab:hover { color:var(--text); }
 .trade-tab.active { background:var(--accent); color:#000; }
+.trade-tab.active.sell { background:var(--red); color:#fff; }
 .trade-input { display:flex; flex-direction:column; gap:6px; }
-.trade-label { font-size:13px; color:var(--dim); font-weight:500; }
-.input-box { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:10px; }
+.trade-label { font-size:12px; color:var(--dim); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+.input-box { background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:10px; transition:border 0.2s; }
 .input-box:focus-within { border-color:var(--accent); }
-.trade-inp { flex:1; background:transparent; border:none; color:var(--text); font-size:18px; font-weight:700; outline:none; font-family:inherit; width:100%; }
+.trade-inp { flex:1; background:transparent; border:none; color:var(--text); font-size:20px; font-weight:700; outline:none; font-family:inherit; width:100%; }
 .trade-inp::placeholder { color:var(--dim2); }
 .trade-badge { display:flex; align-items:center; gap:6px; background:var(--bg3); padding:6px 12px; border-radius:8px; font-size:13px; font-weight:600; }
 .trade-badge img { width:20px; height:20px; border-radius:50%; }
-.trade-hint { font-size:12px; color:var(--dim2); text-align:right; }
-.trade-info { display:flex; flex-direction:column; gap:8px; padding-top:16px; border-top:1px solid var(--border); }
+.trade-hint { font-size:12px; color:var(--dim2); text-align:right; margin-top:2px; }
+.trade-info { display:flex; flex-direction:column; gap:10px; padding-top:16px; border-top:1px solid var(--border); }
 .trade-info-row { display:flex; justify-content:space-between; font-size:13px; }
 .trade-info-label { color:var(--dim); }
 .trade-info-val { font-weight:600; }
-.progress-bar { height:8px; background:var(--bg2); border-radius:4px; overflow:hidden; margin:8px 0; }
-.progress-fill { height:100%; background:var(--accent); border-radius:4px; transition:width 0.5s; }
+.trade-info-val.accent { color:var(--accent); }
 
-.holders-section, .tx-section, .comments-section { padding:24px 32px; border-top:1px solid var(--border); }
-.section-header2 { font-size:14px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:16px; }
+/* Percentage quick buttons */
+.pct-btns { display:flex; gap:6px; margin-top:4px; }
+.pct-btn { flex:1; padding:8px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--dim); font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; transition:0.2s; }
+.pct-btn:hover { border-color:var(--accent); color:var(--text); }
+.pct-btn:active { background:var(--accent); color:#000; }
+
+/* Progress bar */
+.progress-bar { height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; margin:8px 0; }
+.progress-fill { height:100%; background:var(--accent); border-radius:3px; transition:width 0.5s; }
+.progress-labels { display:flex; justify-content:space-between; font-size:11px; color:var(--dim2); margin-top:4px; }
+
+/* Bottom section: Holders + TX + Comments */
+.detail-bottom { display:flex; flex-direction:column; gap:0; }
+.detail-columns { display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid var(--border); }
+.detail-col { padding:24px 32px; border-right:1px solid var(--border); }
+.detail-col:last-child { border-right:none; }
+.section-header2 { font-size:12px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:16px; }
+
 .holder-table { width:100%; border-collapse:collapse; }
-.holder-table th { text-align:left; padding:12px; font-size:11px; color:var(--dim2); text-transform:uppercase; letter-spacing:1px; font-weight:600; border-bottom:1px solid var(--border); }
-.holder-table td { padding:12px; font-size:14px; border-bottom:1px solid var(--border); }
+.holder-table th { text-align:left; padding:10px 12px; font-size:11px; color:var(--dim2); text-transform:uppercase; letter-spacing:1px; font-weight:600; border-bottom:1px solid var(--border); }
+.holder-table td { padding:10px 12px; font-size:13px; border-bottom:1px solid var(--border); }
+.holder-table tr:last-child td { border-bottom:none; }
 .holder-table tr:hover td { background:var(--bg2); }
-.holder-rank { width:28px; height:28px; border-radius:50%; background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+.holder-rank { width:26px; height:26px; border-radius:50%; background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
 .holder-rank.top { background:var(--accent); color:#000; }
-.holder-addr { font-family:monospace; font-size:13px; }
-.holder-pct { font-weight:700; }
+.holder-addr { font-family:monospace; font-size:12px; }
+.holder-pct { font-weight:700; font-size:13px; }
 .holder-pct.accent { color:var(--accent); }
 
-.tx-item { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); font-size:13px; }
-.tx-badge { padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700; }
+/* Transactions */
+.tx-list { display:flex; flex-direction:column; }
+.tx-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.tx-item:last-child { border-bottom:none; }
+.tx-badge { padding:3px 8px; border-radius:6px; font-size:11px; font-weight:700; }
 .tx-badge.buy { background:rgba(0,230,118,0.1); color:var(--green); }
 .tx-badge.sell { background:rgba(255,23,68,0.1); color:var(--red); }
-.tx-amt { font-weight:700; }
+.tx-amt { font-weight:700; font-size:13px; }
 .tx-amt.buy { color:var(--green); }
 .tx-amt.sell { color:var(--red); }
+.tx-val { font-size:12px; color:var(--dim2); }
 
+/* Comments */
+.comments-section { padding:24px 32px; }
 .comment-area { display:flex; gap:12px; margin-bottom:16px; }
 .comment-avatar { width:40px; height:40px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; color:#000; font-size:14px; flex-shrink:0; }
-.comment-input-box { flex:1; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px; }
+.comment-input-box { flex:1; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px; transition:border 0.2s; }
+.comment-input-box:focus-within { border-color:var(--accent); }
 .comment-input { flex:1; background:transparent; border:none; color:var(--text); font-size:14px; outline:none; font-family:inherit; }
 .comment-input::placeholder { color:var(--dim2); }
-.comment-post { background:var(--accent); color:#000; border:none; padding:8px 16px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; }
+.comment-post { background:var(--accent); color:#000; border:none; padding:8px 16px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; transition:0.2s; }
+.comment-post:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(204,255,0,0.2); }
 .comment-item { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+.comment-item:last-child { border-bottom:none; }
 .comment-body { flex:1; }
 .comment-author { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
 .comment-name { font-size:14px; font-weight:700; }
 .comment-time { font-size:12px; color:var(--dim2); }
 .comment-text { font-size:14px; color:var(--dim); line-height:1.5; }
+
+/* Back button on mobile */
+.mobile-back { display:none; align-items:center; gap:6px; padding:12px 24px; background:var(--bg); border-bottom:1px solid var(--border); font-size:14px; font-weight:700; color:var(--dim); cursor:pointer; font-family:inherit; border:none; }
+.mobile-back:hover { color:var(--text); }
 
 /* Launch Page */
 .launch-page { max-width:520px; margin:40px auto; padding:0 24px; }
@@ -316,7 +359,7 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 ::-webkit-scrollbar-thumb:hover { background:var(--dim2); }
 
 /* Responsive */
-@media (max-width:1024px) { .detail-sidebar { display:none; } .detail-layout { flex-direction:column; } .trade-panel { width:100%; min-width:auto; } .home-sidebar { display:none; } }
+@media (max-width:1024px) { .detail-sidebar { display:none; } .detail-layout { flex-direction:column; } .trade-panel { width:100%; min-width:auto; border-left:none; border-top:1px solid var(--border); } .home-sidebar { display:none; } }
 @media (max-width:768px) {
 .hero h1 { font-size:36px; }
 .hero-stats { gap:24px; }
@@ -324,7 +367,22 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .token-grid { grid-template-columns:1fr; }
 .tlist-stats, .tlist-chart { display:none; }
 .detail-body { flex-direction:column; }
-.trade-panel { width:100%; }
+.trade-panel { width:100%; border-left:none; border-top:1px solid var(--border); padding:20px; }
+.detail-header { padding:16px 20px; flex-wrap:wrap; gap:12px; }
+.detail-header .detail-img { width:40px; height:40px; border-radius:10px; }
+.detail-name { font-size:18px; }
+.detail-header-price { text-align:left; min-width:auto; flex:1 1 100%; margin-top:4px; }
+.detail-price-big { font-size:24px; }
+.stats-row { grid-template-columns:repeat(2,1fr); padding:12px 20px; gap:8px; }
+.stat-card { padding:12px; }
+.stat-value { font-size:16px; }
+.chart-area { padding:16px 20px; }
+.chart-price { font-size:24px; }
+.detail-columns { grid-template-columns:1fr; }
+.detail-col { padding:16px 20px; border-right:none; border-bottom:1px solid var(--border); }
+.detail-col:last-child { border-bottom:none; }
+.comments-section { padding:16px 20px; }
+.mobile-back { display:flex; }
 .profile-header { flex-direction:column; text-align:center; }
 .refer-stats-grid { grid-template-columns:1fr; }
 .nav-links, .nav-right .search-box { display:none; }
@@ -736,25 +794,129 @@ function pickToken(id) { selected=TOKENS.find(t=>t.id===id); renderSidebar(); re
 
 function renderDetail() {
 if(!selected)return; const t=selected, up=t.change>=0;
+const badge = t.prog>=100 ? '<div class="detail-badge">Bonded</div>' : `<div class="detail-badge">${t.prog}% to Bond</div>`;
+const changeClass = up ? 'up' : 'down';
+const changeSign = up ? '+' : '';
+
 document.getElementById('detailMain').innerHTML = `
-<div class="detail-header"><img class="detail-img" src="${t.img}"><div class="detail-title"><div class="detail-name">${t.name}${t.prog>=100?'<div class="detail-badge">Bonded</div>':`<div class="detail-badge">${t.prog}% to Bond</div>`}</div><div class="detail-symbol">$${t.symbol} Created ${t.created}</div></div><div style="display:flex;gap:10px;"><button class="btn btn-accent" onclick="scrollTrade()">Buy</button><button class="btn btn-ghost" onclick="scrollTrade()">Sell</button></div></div>
-<div class="stats-row"><div class="stat-box"><div class="stat-label">Market Cap</div><div class="stat-value">$${fmtN(t.mc)}</div></div><div class="stat-box"><div class="stat-label">Volume (24h)</div><div class="stat-value accent">$${fmtN(t.vol)}</div></div><div class="stat-box"><div class="stat-label">Holders</div><div class="stat-value">${fmtN(t.holders)}</div></div><div class="stat-box"><div class="stat-label">Liquidity</div><div class="stat-value">$${fmtN(t.liq)}</div></div></div>
-<div class="detail-body"><div class="chart-area"><div class="chart-header"><div><div class="chart-price">$${fmtP(t.price)}</div><div style="color:${up?'var(--green)':'var(--red)'};font-weight:700;margin-top:4px;">${up?'+':''}${t.change.toFixed(2)}%</div></div><div class="timeframes"><button class="tframe active">1m</button><button class="tframe">5m</button><button class="tframe">15m</button><button class="tframe">1h</button><button class="tframe">4h</button><button class="tframe">1d</button></div></div><div class="chart-wrap"><canvas id="priceChart"></canvas></div></div>
-<div class="trade-panel"><div class="trade-tabs"><button class="trade-tab active" onclick="setBuy(true)">Buy</button><button class="trade-tab" onclick="setBuy(false)">Sell</button></div>
-<div class="trade-input"><label class="trade-label">Amount</label><div class="input-box"><input type="number" class="trade-inp" id="tradeAmt" placeholder="0.0"><div class="trade-badge">ETH</div></div></div>
-<div class="trade-hint">Balance: 2.45 ETH</div>
-<div class="trade-info"><div class="trade-info-row"><span class="trade-info-label">Price</span><span class="trade-info-val">$${fmtP(t.price)}</span></div><div class="trade-info-row"><span class="trade-info-label">Slippage</span><span class="trade-info-val">1.5%</span></div><div class="trade-info-row"><span class="trade-info-label">Fee</span><span class="trade-info-val">0.5%</span></div></div>
-<div style="margin-top:auto;"><div style="font-size:12px;color:var(--dim);margin-bottom:8px;">Bonding Curve Progress</div><div class="progress-bar"><div class="progress-fill" style="width:${t.prog}%"></div></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--dim2);"><span>$${fmtN(t.mc)}</span><span>$69K</span></div></div>
-<button class="btn btn-accent" style="width:100%;margin-top:16px;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button></div></div>
-<div class="holders-section"><div class="section-header2">Top Holders</div><table class="holder-table"><thead><tr><th>Rank</th><th>Address</th><th>Amount</th><th>%</th></tr></thead><tbody>${t.holdersList.map((h,i)=>`<tr><td><div class="holder-rank ${i<3?'top':''}">${i+1}</div></td><td class="holder-addr">${h.addr}</td><td>${h.amt}</td><td class="holder-pct ${i===0?'accent':''}">${h.pct}%</td></tr>`).join('')||'<tr><td colspan="4" style="text-align:center;color:var(--dim2);padding:24px;">No holder data</td></tr>'}</tbody></table></div>
-<div class="tx-section"><div class="section-header2">Recent Transactions</div>${t.txs.length?t.txs.map(tx=>`<div class="tx-item"><span class="tx-badge ${tx.type}">${tx.type.toUpperCase()}</span><span class="tx-amt ${tx.type}">${tx.amt}</span><span style="color:var(--dim2);">${tx.val}</span><span style="color:var(--dim2);font-size:12px;">${tx.tm}</span></div>`).join(''):'<div style="color:var(--dim2);padding:24px;text-align:center;">No transactions yet</div>'}</div>
-<div class="comments-section"><div class="section-header2">Comments</div><div class="comment-area"><div class="comment-avatar">?</div><div class="comment-input-box"><input type="text" class="comment-input" placeholder="Add a comment..."><button class="comment-post" onclick="postComment()">Post</button></div></div><div id="commentsList">${t.comments.map(c=>`<div class="comment-item"><div class="comment-avatar">${c.n[0]}</div><div class="comment-body"><div class="comment-author"><span class="comment-name">${c.n}</span><span class="comment-time">${c.t}</span></div><div class="comment-text">${c.txt}</div></div></div>`).join('')}</div></div>`;
+<button class="mobile-back" onclick="go('home')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> Back to Market</button>
+
+<div class="detail-header">
+  <img class="detail-img" src="${t.img}">
+  <div class="detail-header-info">
+    <div class="detail-header-top">
+      <div class="detail-name">${t.name}</div>
+      ${badge}
+      <div class="detail-symbol">$${t.symbol}</div>
+    </div>
+    <div class="detail-desc">${t.desc}</div>
+  </div>
+  <div class="detail-header-price">
+    <div class="detail-price-big">$${fmtP(t.price)}</div>
+    <div class="detail-change-big" style="color:${up?'var(--green)':'var(--red)'};font-weight:700;">${changeSign}${t.change.toFixed(2)}%</div>
+    <div class="detail-created">Created ${t.created}</div>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card"><div class="stat-label">Market Cap</div><div class="stat-value">$${fmtN(t.mc)}</div></div>
+  <div class="stat-card"><div class="stat-label">Volume (24h)</div><div class="stat-value accent">$${fmtN(t.vol)}</div></div>
+  <div class="stat-card"><div class="stat-label">Holders</div><div class="stat-value">${fmtN(t.holders)}</div></div>
+  <div class="stat-card"><div class="stat-label">Liquidity</div><div class="stat-value">$${fmtN(t.liq)}</div></div>
+</div>
+
+<div class="detail-body">
+  <div class="chart-area">
+    <div class="chart-header">
+      <div><div class="chart-price">$${fmtP(t.price)}</div><div class="chart-change ${changeClass}">${changeSign}${t.change.toFixed(2)}%</div></div>
+      <div class="timeframes">
+        <button class="tframe active">1m</button><button class="tframe">5m</button><button class="tframe">15m</button>
+        <button class="tframe">1h</button><button class="tframe">4h</button><button class="tframe">1d</button>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
+  </div>
+
+  <div class="trade-panel">
+    <div class="trade-tabs">
+      <button class="trade-tab active" onclick="setBuy(true)">Buy</button>
+      <button class="trade-tab" onclick="setBuy(false)">Sell</button>
+    </div>
+    <div class="trade-input">
+      <label class="trade-label">Amount</label>
+      <div class="input-box"><input type="number" class="trade-inp" id="tradeAmt" placeholder="0.0"><div class="trade-badge">ETH</div></div>
+      <div class="pct-btns">
+        <button class="pct-btn" onclick="setPct(0.25)">25%</button>
+        <button class="pct-btn" onclick="setPct(0.5)">50%</button>
+        <button class="pct-btn" onclick="setPct(0.75)">75%</button>
+        <button class="pct-btn" onclick="setPct(1)">MAX</button>
+      </div>
+    </div>
+    <div class="trade-hint">Balance: 2.45 ETH</div>
+    <div class="trade-info">
+      <div class="trade-info-row"><span class="trade-info-label">Price</span><span class="trade-info-val">$${fmtP(t.price)}</span></div>
+      <div class="trade-info-row"><span class="trade-info-label">Slippage</span><span class="trade-info-val">1.5%</span></div>
+      <div class="trade-info-row"><span class="trade-info-label">Fee</span><span class="trade-info-val">0.5%</span></div>
+      <div class="trade-info-row"><span class="trade-info-label">Total</span><span class="trade-info-val accent">$0.00</span></div>
+    </div>
+    <div style="margin-top:auto;">
+      <div style="font-size:12px;color:var(--dim);margin-bottom:8px;">Bonding Curve Progress</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${t.prog}%"></div></div>
+      <div class="progress-labels"><span>$${fmtN(t.mc)}</span><span>$69K</span></div>
+    </div>
+    <button class="btn btn-accent" style="width:100%;margin-top:16px;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button>
+  </div>
+</div>
+
+<div class="detail-bottom">
+  <div class="detail-columns">
+    <div class="detail-col">
+      <div class="section-header2">Top Holders</div>
+      <table class="holder-table">
+        <thead><tr><th>Rank</th><th>Address</th><th>Amount</th><th>%</th></tr></thead>
+        <tbody>
+          ${t.holdersList.map((h,i)=>`<tr><td><div class="holder-rank ${i<3?'top':''}">${i+1}</div></td><td class="holder-addr">${h.addr}</td><td>${h.amt}</td><td class="holder-pct ${i===0?'accent':''}">${h.pct}%</td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--dim2);padding:20px;">No holder data</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+    <div class="detail-col">
+      <div class="section-header2">Recent Transactions</div>
+      <div class="tx-list">
+        ${t.txs.length ? t.txs.map(tx=>`<div class="tx-item"><div style="display:flex;align-items:center;gap:8px;"><span class="tx-badge ${tx.type}">${tx.type.toUpperCase()}</span><span class="tx-amt ${tx.type}">${tx.amt}</span></div><div style="text-align:right;"><span class="tx-val">${tx.val}</span><div style="font-size:11px;color:var(--dim2);margin-top:2px;">${tx.tm}</div></div></div>`).join('') : '<div style="color:var(--dim2);padding:20px;text-align:center;">No transactions yet</div>'}
+      </div>
+    </div>
+  </div>
+  <div class="comments-section">
+    <div class="section-header2">Comments</div>
+    <div class="comment-area">
+      <div class="comment-avatar">?</div>
+      <div class="comment-input-box">
+        <input type="text" class="comment-input" placeholder="Add a comment...">
+        <button class="comment-post" onclick="postComment()">Post</button>
+      </div>
+    </div>
+    <div id="commentsList">
+      ${t.comments.map(c=>`<div class="comment-item"><div class="comment-avatar">${c.n[0]}</div><div class="comment-body"><div class="comment-author"><span class="comment-name">${c.n}</span><span class="comment-time">${c.t}</span></div><div class="comment-text">${c.txt}</div></div></div>`).join('')}
+    </div>
+  </div>
+</div>`;
+
 if(chartInst)chartInst.destroy();
 const ctx=document.getElementById('priceChart').getContext('2d');
 chartInst=new Chart(ctx,{type:'line',data:{labels:t.hist.map((_,i)=>i),datasets:[{data:t.hist,borderColor:'#ccff00',backgroundColor:'rgba(204,255,0,0.05)',borderWidth:2,tension:0.4,fill:true,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{display:false}}}});
 }
-function setBuy(b){isBuy=b;document.querySelectorAll('.trade-tab').forEach((t,i)=>t.classList.toggle('active',i===(b?0:1)));}
-function scrollTrade(){document.querySelector('.trade-panel').scrollIntoView({behavior:'smooth'});}
+
+function setBuy(b){
+  isBuy=b;
+  const tabs = document.querySelectorAll('.trade-tab');
+  tabs.forEach((t,i)=>{ t.classList.toggle('active', i===(b?0:1)); t.classList.toggle('sell', !b && i===1); });
+  const btn = document.querySelector('.trade-panel .btn.btn-accent');
+  if(btn) btn.textContent = (isBuy?'Buy ':'Sell ') + '$' + selected.symbol;
+}
+
+function setPct(pct) { document.getElementById('tradeAmt').value = (2.45 * pct).toFixed(4); }
+
+function scrollTrade() { }
 function trade(){const a=document.getElementById('tradeAmt').value;if(!a||a<=0){alert('Enter amount');return;}const v=(parseFloat(a)*selected.price*2300).toFixed(2),tm='just now';myTxs.unshift({type:isBuy?'buy':'sell',token:selected.symbol,amt:(isBuy?'+':'-')+a+' ETH',val:'$'+v,tm});if(connected){const ex=myPortfolio.find(p=>p.t.id===selected.id);if(ex){ex.amt+=isBuy?parseFloat(a):-parseFloat(a);if(ex.amt<=0)myPortfolio=myPortfolio.filter(p=>p.t.id!==selected.id);}else if(isBuy)myPortfolio.push({t:selected,amt:parseFloat(a),val:parseFloat(v)});}alert(`${isBuy?'Bought':'Sold'} ${a} ETH of $${selected.symbol}`);renderProfile();}
 function postComment(){const inp=document.querySelector('.comment-input');if(!inp.value.trim())return;selected.comments.push({n:connected?(addr.slice(0,6)+'...'+addr.slice(-4)):'Anonymous',t:'just now',txt:inp.value.trim()});inp.value='';renderDetail();}
 
