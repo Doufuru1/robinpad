@@ -121,18 +121,7 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 
 /* Token Detail - NEW Layout */
 .detail-layout { display:flex; height:calc(100vh - 100px); }
-.detail-sidebar { width:300px; min-width:300px; border-right:1px solid var(--border); overflow-y:auto; background:var(--bg); }
 .detail-main { flex:1; overflow-y:auto; background:var(--bg); display:flex; flex-direction:column; }
-.sidebar-header { padding:12px 20px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:10; font-size:12px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; }
-.sidebar-item { padding:12px 20px; border-bottom:1px solid var(--border); cursor:pointer; transition:0.15s; display:flex; align-items:center; gap:12px; }
-.sidebar-item:hover { background:var(--bg3); }
-.sidebar-item.active { border-left:3px solid var(--accent); background:var(--bg2); }
-.sidebar-img { width:36px; height:36px; border-radius:10px; object-fit:cover; border:2px solid var(--border); }
-.sidebar-info { flex:1; min-width:0; }
-.sidebar-name { font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.sidebar-meta { font-size:11px; color:var(--dim2); }
-.sidebar-price { text-align:right; }
-.sidebar-pval { font-size:14px; font-weight:700; }
 
 /* Detail Header */
 .detail-header { padding:20px 32px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:16px; }
@@ -347,7 +336,7 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .footer-social { display:flex; gap:16px; }
 .footer-social a { color:var(--dim); transition:0.2s; }
 .footer-social a:hover { color:var(--accent); }
-@media (max-width:1024px) { .detail-sidebar { display:none; } .detail-layout { flex-direction:column; } .trade-panel { width:100%; min-width:auto; border-left:none; border-top:1px solid var(--border); } .home-sidebar { display:none; } }
+@media (max-width:1024px) { .detail-layout { flex-direction:column; } .trade-panel { width:100%; min-width:auto; border-left:none; border-top:1px solid var(--border); } .home-sidebar { display:none; } }
 @media (max-width:768px) {
 .hero h1 { font-size:36px; }
 .hero-stats { gap:24px; }
@@ -520,10 +509,7 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 
 <!-- Market Detail -->
 <div id="page-market" class="page">
-<div class="detail-layout">
-<div class="detail-sidebar" id="sidebar"></div>
 <div class="detail-main" id="detailMain"></div>
-</div>
 </div>
 
 <!-- Launch Page -->
@@ -750,7 +736,7 @@ function go(page) {
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
 if(page==='home'){ document.getElementById('page-home').classList.add('active'); document.querySelector('[data-page="home"]').classList.add('active'); renderHome(); }
-else if(page==='market'){ document.getElementById('page-market').classList.add('active'); document.querySelector('[data-page="home"]').classList.add('active'); renderSidebar(); renderDetail(); }
+else if(page==='market'){ document.getElementById('page-market').classList.add('active'); document.querySelector('[data-page="home"]').classList.add('active'); renderDetail(); }
 else if(page==='launch'){ document.getElementById('page-launch').classList.add('active'); document.querySelector('[data-page="launch"]').classList.add('active'); }
 else if(page==='profile'){ document.getElementById('page-profile').classList.add('active'); document.querySelector('[data-page="profile"]').classList.add('active'); renderProfile(); }
 else if(page==='refer'){ document.getElementById('page-refer').classList.add('active'); document.querySelector('[data-page="refer"]').classList.add('active'); renderRefer(); }
@@ -837,17 +823,6 @@ function renderTicker() {
 }
 
 function openDetail(id) { selected=TOKENS.find(t=>t.id===id); go('market'); }
-
-function renderSidebar() {
-const q = document.getElementById('searchInput').value.toLowerCase();
-const list = TOKENS.filter(t=>t.name.toLowerCase().includes(q)||t.symbol.toLowerCase().includes(q));
-document.getElementById('sidebar').innerHTML = list.map(t=>{
-const up=t.change>=0; const act=selected&&selected.id===t.id?'active':'';
-return `<div class="sidebar-item ${act}" onclick="pickToken(${t.id})"><img class="sidebar-img" src="${t.img}"><div class="sidebar-info"><div class="sidebar-name">${t.name}</div><div class="sidebar-meta">MC: $${fmtN(t.mc)}</div></div><div class="sidebar-price"><div class="sidebar-pval">$${fmtP(t.price)}</div><div style="color:${up?'var(--green)':'var(--red)'};font-size:12px;font-weight:600;">${up?'+':''}${t.change.toFixed(1)}%</div></div></div>`;
-}).join('');
-}
-
-function pickToken(id) { selected=TOKENS.find(t=>t.id===id); renderSidebar(); renderDetail(); }
 
 function renderDetail() {
 if(!selected)return; const t=selected, up=t.change>=0;
