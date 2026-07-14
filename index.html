@@ -102,24 +102,6 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .home-search input { width:240px; padding:10px 14px 10px 36px; font-size:13px; border-radius:10px; }
 .home-search svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--dim2); }
 
-/* Main layout: tokens + sidebar */
-.home-layout { display:flex; gap:24px; }
-.home-main { flex:1; min-width:0; }
-.home-sidebar { width:300px; min-width:300px; }
-
-.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:20px; margin-bottom:16px; }
-.sidebar-title { font-size:14px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:16px; }
-.grad-item { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); cursor:pointer; transition:0.15s; }
-.grad-item:last-child { border-bottom:none; }
-.grad-item:hover { opacity:0.8; }
-.grad-item img { width:36px; height:36px; border-radius:10px; object-fit:cover; }
-.grad-info { flex:1; min-width:0; }
-.grad-name { font-size:13px; font-weight:700; }
-.grad-meta { font-size:11px; color:var(--dim2); }
-.grad-price { text-align:right; }
-.grad-pval { font-size:14px; font-weight:700; }
-.grad-change { font-size:11px; font-weight:700; }
-
 /* Token Cards */
 .section-title { font-size:24px; font-weight:800; margin-bottom:20px; }
 .token-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
@@ -136,23 +118,6 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .tcard-change.up { background:rgba(0,230,118,0.1); color:var(--green); }
 .tcard-change.down { background:rgba(255,23,68,0.1); color:var(--red); }
 .tcard-meta { font-size:11px; color:var(--dim2); margin-top:8px; }
-
-/* Token List */
-.tlist { display:flex; flex-direction:column; gap:8px; margin-top:32px; }
-.tlist-row { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:14px 20px; display:flex; align-items:center; gap:16px; cursor:pointer; transition:0.2s; }
-.tlist-row:hover { border-color:var(--accent); }
-.tlist-img { width:40px; height:40px; border-radius:10px; object-fit:cover; border:2px solid var(--border); }
-.tlist-info { flex:1; min-width:0; }
-.tlist-name { font-size:15px; font-weight:700; }
-.tlist-meta { font-size:12px; color:var(--dim2); }
-.tlist-stats { display:flex; gap:24px; }
-.tlist-stat { text-align:center; min-width:80px; }
-.tlist-stat-val { font-size:14px; font-weight:700; }
-.tlist-stat-label { font-size:11px; color:var(--dim2); }
-.tlist-chart { width:80px; height:32px; }
-.tlist-price { text-align:right; min-width:100px; }
-.tlist-price-val { font-size:16px; font-weight:800; }
-.tlist-change { font-size:13px; font-weight:700; }
 
 /* Token Detail - NEW Layout */
 .detail-layout { display:flex; height:calc(100vh - 100px); }
@@ -470,19 +435,7 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 </div>
 </div>
 
-<div class="home-layout">
-<div class="home-main">
 <div class="token-grid" id="homeGrid"></div>
-<div class="section-title" style="margin-top:48px;" data-i18n="all_projects">All Projects</div>
-<div class="tlist" id="homeList"></div>
-</div>
-<div class="home-sidebar">
-<div class="sidebar-card">
-<div class="sidebar-title" data-i18n="recently_graduated">RECENTLY GRADUATED</div>
-<div id="gradList"></div>
-</div>
-</div>
-</div>
 </div>
 </div>
 
@@ -607,7 +560,6 @@ const I18N = {
     btn_launch: 'LAUNCH YOUR MEME', btn_explore: 'EXPLORE TOKENS',
     stat_tokens: 'Tokens Launched', stat_vol: 'Total Volume', stat_traders: 'Active Traders', stat_grad: 'Graduated',
     tab_trending: 'TRENDING', tab_new: 'NEW', tab_graduating: 'GRADUATING', tab_leaderboard: 'LEADERBOARD',
-    all_projects: 'All Projects', recently_graduated: 'RECENTLY GRADUATED',
     launch_title: 'Launch Your Token', launch_sub: 'Create a meme coin in seconds. No coding required.',
     upload_text: 'Upload Token Image', upload_hint: 'PNG, JPG, GIF up to 5MB',
     label_name: 'Token Name', label_symbol: 'Token Symbol', label_desc: 'Description',
@@ -635,7 +587,6 @@ const I18N = {
     btn_launch: '发射你的MEME', btn_explore: '探索代币',
     stat_tokens: '已发射代币', stat_vol: '总交易量', stat_traders: '活跃交易者', stat_grad: '已毕业',
     tab_trending: '热门', tab_new: '最新', tab_graduating: '即将毕业', tab_leaderboard: '排行榜',
-    all_projects: '所有项目', recently_graduated: '最近毕业',
     launch_title: '发射你的代币', launch_sub: '几秒钟内创建Meme代币。无需编码。',
     upload_text: '上传代币图片', upload_hint: 'PNG, JPG, GIF 最大5MB',
     label_name: '代币名称', label_symbol: '代币符号', label_desc: '描述',
@@ -756,17 +707,7 @@ const up=t.change>=0;
 return `<div class="token-card" onclick="openDetail(${t.id})"><div class="tcard-top"><img class="tcard-img" src="${t.img}"><div><div class="tcard-name">${t.name}</div><div class="tcard-symbol">$${t.symbol}</div></div>${t.prog>=100?'<div class="detail-badge">Bonded</div>':''}</div><div class="tcard-chart">${miniChart(t.hist,up)}</div><div class="tcard-bottom"><div class="tcard-price">$${fmtP(t.price)}</div><div class="tcard-change ${up?'up':'down'}">${up?'+':''}${t.change.toFixed(1)}%</div></div><div class="tcard-meta">MC: $${fmtN(t.mc)} Vol: $${fmtN(t.vol)}</div></div>`;
 }).join('');
 const rows = document.getElementById('homeList');
-rows.innerHTML = list.map(t=>{
-const up=t.change>=0;
-return `<div class="tlist-row" onclick="openDetail(${t.id})"><img class="tlist-img" src="${t.img}"><div class="tlist-info"><div class="tlist-name">${t.name} <span style="color:var(--dim);font-weight:500;">$${t.symbol}</span></div><div class="tlist-meta">Created ${t.created} ${fmtN(t.holders)} holders</div></div><div class="tlist-stats"><div class="tlist-stat"><div class="tlist-stat-val">$${fmtN(t.mc)}</div><div class="tlist-stat-label">Market Cap</div></div><div class="tlist-stat"><div class="tlist-stat-val">$${fmtN(t.vol)}</div><div class="tlist-stat-label">Volume</div></div><div class="tlist-stat"><div class="tlist-stat-val">${t.prog}%</div><div class="tlist-stat-label">Progress</div></div></div><div class="tlist-chart">${miniChart(t.hist,up)}</div><div class="tlist-price"><div class="tlist-price-val">$${fmtP(t.price)}</div><div class="tlist-change" style="color:${up?'var(--green)':'var(--red)'}">${up?'+':''}${t.change.toFixed(1)}%</div></div></div>`;
-}).join('');
-
-// Recently graduated
-const grad = TOKENS.filter(t => t.prog >= 100).slice(0, 5);
-document.getElementById('gradList').innerHTML = grad.map(t => {
-  const up = t.change >= 0;
-  return `<div class="grad-item" onclick="openDetail(${t.id})"><img src="${t.img}"><div class="grad-info"><div class="grad-name">${t.name}</div><div class="grad-meta">$${t.symbol}</div></div><div class="grad-price"><div class="grad-pval">$${fmtP(t.price)}</div><div class="grad-change" style="color:${up?'var(--green)':'var(--red)'}">${up?'+':''}${t.change.toFixed(1)}%</div></div></div>`;
-}).join('');
+if(rows) rows.innerHTML = '';
 }
 
 // Ticker
