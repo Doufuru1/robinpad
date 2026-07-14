@@ -902,8 +902,10 @@ document.getElementById('detailMain').innerHTML = `
       <div class="progress-bar"><div class="progress-fill" style="width:${t.prog}%"></div></div>
       <div class="progress-labels"><span>$${fmtN(t.mc)}</span><span>$69K</span></div>
     </div>
-    <button class="btn btn-accent" style="width:100%;margin-top:16px;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button>
-    <button class="btn btn-ghost" style="width:100%;margin-top:8px;padding:12px;font-size:13px;" onclick="alert('Slippage settings coming soon')" data-i18n="btn_slippage">设置滑点</button>
+    <div style="display:flex;gap:8px;margin-top:16px;">
+      <button class="btn btn-ghost" style="width:48px;min-width:48px;height:48px;padding:0;display:flex;align-items:center;justify-content:center;font-size:18px;" onclick="alert('Slippage settings coming soon')" title="Set Slippage">⚙️</button>
+      <button class="btn btn-accent" style="flex:1;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button>
+    </div>
   </div>
 </div>
 
