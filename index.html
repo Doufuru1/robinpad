@@ -323,7 +323,30 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 ::-webkit-scrollbar-thumb:hover { background:var(--dim2); }
 
-/* Responsive */
+/* Pagination */
+.pagination { display:flex; justify-content:center; align-items:center; gap:8px; margin-top:32px; margin-bottom:32px; }
+.page-btn { min-width:36px; height:36px; border-radius:8px; border:1px solid var(--border); background:var(--bg2); color:var(--dim); font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; transition:0.2s; padding:0 12px; }
+.page-btn:hover { border-color:var(--accent); color:var(--text); }
+.page-btn.active { background:var(--accent); color:#000; border-color:var(--accent); }
+.page-btn:disabled { opacity:0.4; cursor:not-allowed; border-color:var(--border); color:var(--dim2); }
+.page-dots { color:var(--dim2); font-size:13px; font-weight:700; padding:0 4px; }
+
+/* Footer */
+.site-footer { border-top:1px solid var(--border); background:var(--bg); padding:48px 24px 24px; margin-top:24px; }
+.footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; gap:48px; flex-wrap:wrap; }
+.footer-brand { max-width:320px; }
+.footer-logo { display:flex; align-items:center; gap:10px; font-weight:900; font-size:18px; margin-bottom:12px; }
+.footer-logo-icon { width:32px; height:32px; background:var(--accent); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#000; }
+.footer-desc { font-size:13px; color:var(--dim); line-height:1.6; }
+.footer-links { display:flex; gap:48px; flex-wrap:wrap; }
+.footer-col { display:flex; flex-direction:column; gap:10px; }
+.footer-title { font-size:12px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.footer-col a { font-size:14px; color:var(--dim); text-decoration:none; transition:0.2s; }
+.footer-col a:hover { color:var(--accent); }
+.footer-bottom { max-width:1200px; margin:32px auto 0; padding-top:24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:12px; color:var(--dim2); }
+.footer-social { display:flex; gap:16px; }
+.footer-social a { color:var(--dim); transition:0.2s; }
+.footer-social a:hover { color:var(--accent); }
 @media (max-width:1024px) { .detail-sidebar { display:none; } .detail-layout { flex-direction:column; } .trade-panel { width:100%; min-width:auto; border-left:none; border-top:1px solid var(--border); } .home-sidebar { display:none; } }
 @media (max-width:768px) {
 .hero h1 { font-size:36px; }
@@ -356,6 +379,9 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 .hero-btns .btn { width:100%; }
 .home-search { width:100%; margin-left:0; margin-top:8px; }
 .home-search input { width:100%; }
+.footer-inner { flex-direction:column; gap:32px; }
+.footer-links { gap:32px; width:100%; }
+.footer-bottom { flex-direction:column; text-align:center; }
 }
 </style>
 </head>
@@ -408,7 +434,7 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 <!-- Home Page -->
 <div id="page-home" class="page active">
 <div class="hero">
-<div class="hero-badge"><div class="live-dot"></div><span data-i18n="hero_badge">SOLANA MEME LAUNCHPAD &bull; LIVE</span></div>
+<div class="hero-badge"><div class="live-dot"></div><span data-i18n="hero_badge">Robinhood MEME 发射平台</span></div>
 <h1><span class="white" data-i18n="hero_title1">MEME SEASON</span><br><span class="lime" data-i18n="hero_title2">IS HERE.</span></h1>
 <p data-i18n="hero_desc">The most fun way to launch and trade meme tokens. No code, no hassle, just vibes.</p>
 <div class="hero-btns">
@@ -436,6 +462,59 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 </div>
 
 <div class="token-grid" id="homeGrid"></div>
+
+<!-- Pagination -->
+<div class="pagination" id="homePagination"></div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>Robin<span style="color:var(--accent);">Pad</span></div>
+      </div>
+      <div class="footer-desc">The most fun way to launch and trade meme tokens.</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-title">Product</div>
+        <a href="#" onclick="go('home'); return false;">Market</a>
+        <a href="#" onclick="go('launch'); return false;">Launch</a>
+        <a href="#" onclick="go('profile'); return false;">Profile</a>
+        <a href="#" onclick="go('refer'); return false;">Refer</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Social</div>
+        <a href="https://twitter.com/robinpad" target="_blank" rel="noopener">Twitter / X</a>
+        <a href="https://t.me/robinpad" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://discord.gg/robinpad" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Resources</div>
+        <a href="#">Docs</a>
+        <a href="#">GitHub</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 RobinPad. All rights reserved.</span>
+    <div class="footer-social">
+      <a href="https://twitter.com/robinpad" target="_blank" rel="noopener" aria-label="Twitter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://t.me/robinpad" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </a>
+      <a href="https://discord.gg/robinpad" target="_blank" rel="noopener" aria-label="Discord">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
 </div>
 </div>
 
@@ -554,7 +633,7 @@ const I18N = {
   en: {
     nav_market: 'Market', nav_launch: 'Launch', nav_profile: 'Profile', nav_refer: 'Refer',
     connect: 'Connect',
-    hero_badge: 'SOLANA MEME LAUNCHPAD • LIVE',
+    hero_badge: 'Robinhood MEME Launchpad',
     hero_title1: 'MEME SEASON', hero_title2: 'IS HERE.',
     hero_desc: 'Launch meme tokens in seconds with fair-launch bonding curves. No presale, no insiders.',
     btn_launch: 'LAUNCH YOUR MEME', btn_explore: 'EXPLORE TOKENS',
@@ -581,7 +660,7 @@ const I18N = {
   zh: {
     nav_market: '市场', nav_launch: '发射', nav_profile: '个人', nav_refer: '邀请',
     connect: '连接钱包',
-    hero_badge: 'SOLANA MEME 发射平台 • 实时',
+    hero_badge: 'Robinhood MEME 发射平台',
     hero_title1: 'MEME 季', hero_title2: '来了。',
     hero_desc: '使用公平发射的Bonding Curve在几秒内发射Meme代币。无预售，无内部人。',
     btn_launch: '发射你的MEME', btn_explore: '探索代币',
@@ -660,7 +739,7 @@ const TOKENS = [
 
 let selected = TOKENS[0], chartInst = null, isBuy = true, connected = false, addr = '';
 let myPortfolio = [], myCreated = [], myTxs = [], myRefs = [];
-let homeTab = 'trending';
+let homeTab = 'trending', homePage = 1, homePerPage = 8;
 
 function genChart(n, cur) { const d=[]; let p=cur*0.5; for(let i=0;i<n;i++){ p+=(Math.random()-0.4)*p*0.1; if(p<cur*0.1)p=cur*0.1; d.push(p);} d[d.length-1]=cur; return d; }
 function miniChart(d, up) { const w=60,h=30, mx=Math.max(...d), mn=Math.min(...d), r=mx-mn||1; const pts=d.map((v,i)=>`${(i/(d.length-1))*w},${h-((v-mn)/r)*h}`).join(' '); return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${up?'var(--green)':'var(--red)'}" stroke-width="1.5" stroke-linecap="round"/></svg>`; }
@@ -685,6 +764,7 @@ function scrollTokens() {
 
 function setHomeTab(tab) {
   homeTab = tab;
+  homePage = 1;
   document.querySelectorAll('.home-tab').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
   renderHome();
@@ -700,14 +780,50 @@ function getFilteredTokens() {
 }
 
 function renderHome() {
-const list = getFilteredTokens();
+const all = getFilteredTokens();
+const totalPages = Math.max(1, Math.ceil(all.length / homePerPage));
+if (homePage > totalPages) homePage = totalPages;
+const start = (homePage - 1) * homePerPage;
+const list = all.slice(start, start + homePerPage);
+
 const grid = document.getElementById('homeGrid');
 grid.innerHTML = list.map(t=>{
 const up=t.change>=0;
 return `<div class="token-card" onclick="openDetail(${t.id})"><div class="tcard-top"><img class="tcard-img" src="${t.img}"><div><div class="tcard-name">${t.name}</div><div class="tcard-symbol">$${t.symbol}</div></div>${t.prog>=100?'<div class="detail-badge">Bonded</div>':''}</div><div class="tcard-chart">${miniChart(t.hist,up)}</div><div class="tcard-bottom"><div class="tcard-price">$${fmtP(t.price)}</div><div class="tcard-change ${up?'up':'down'}">${up?'+':''}${t.change.toFixed(1)}%</div></div><div class="tcard-meta">MC: $${fmtN(t.mc)} Vol: $${fmtN(t.vol)}</div></div>`;
 }).join('');
+
 const rows = document.getElementById('homeList');
 if(rows) rows.innerHTML = '';
+renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+  const wrap = document.getElementById('homePagination');
+  if (!wrap) return;
+  if (totalPages <= 1) { wrap.innerHTML = ''; return; }
+  let html = '';
+  // prev
+  html += `<button class="page-btn" onclick="changePage(${homePage-1})" ${homePage<=1?'disabled':''}>Prev</button>`;
+  // pages
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= homePage - 1 && i <= homePage + 1)) {
+      html += `<button class="page-btn ${i===homePage?'active':''}" onclick="changePage(${i})">${i}</button>`;
+    } else if (i === homePage - 2 || i === homePage + 2) {
+      html += `<span class="page-dots">...</span>`;
+    }
+  }
+  // next
+  html += `<button class="page-btn" onclick="changePage(${homePage+1})" ${homePage>=totalPages?'disabled':''}>Next</button>`;
+  wrap.innerHTML = html;
+}
+
+function changePage(p) {
+  const all = getFilteredTokens();
+  const totalPages = Math.max(1, Math.ceil(all.length / homePerPage));
+  if (p < 1 || p > totalPages) return;
+  homePage = p;
+  renderHome();
+  document.getElementById('homeTabs').scrollIntoView({behavior:'smooth'});
 }
 
 // Ticker
@@ -725,7 +841,7 @@ function openDetail(id) { selected=TOKENS.find(t=>t.id===id); go('market'); }
 function renderSidebar() {
 const q = document.getElementById('searchInput').value.toLowerCase();
 const list = TOKENS.filter(t=>t.name.toLowerCase().includes(q)||t.symbol.toLowerCase().includes(q));
-document.getElementById('sidebar').innerHTML = `<div class="sidebar-header">Tokens ${list.length}</div>` + list.map(t=>{
+document.getElementById('sidebar').innerHTML = list.map(t=>{
 const up=t.change>=0; const act=selected&&selected.id===t.id?'active':'';
 return `<div class="sidebar-item ${act}" onclick="pickToken(${t.id})"><img class="sidebar-img" src="${t.img}"><div class="sidebar-info"><div class="sidebar-name">${t.name}</div><div class="sidebar-meta">MC: $${fmtN(t.mc)}</div></div><div class="sidebar-price"><div class="sidebar-pval">$${fmtP(t.price)}</div><div style="color:${up?'var(--green)':'var(--red)'};font-size:12px;font-weight:600;">${up?'+':''}${t.change.toFixed(1)}%</div></div></div>`;
 }).join('');
@@ -812,6 +928,12 @@ document.getElementById('detailMain').innerHTML = `
 <div class="detail-bottom">
   <div class="detail-columns">
     <div class="detail-col">
+      <div class="section-header2">Recent Transactions</div>
+      <div class="tx-list">
+        ${t.txs.length ? t.txs.map(tx=>`<div class="tx-item"><div style="display:flex;align-items:center;gap:8px;"><span class="tx-badge ${tx.type}">${tx.type.toUpperCase()}</span><span class="tx-amt ${tx.type}">${tx.amt}</span></div><div style="text-align:right;"><span class="tx-val">${tx.val}</span><div style="font-size:11px;color:var(--dim2);margin-top:2px;">${tx.tm}</div></div></div>`).join('') : '<div style="color:var(--dim2);padding:20px;text-align:center;">No transactions yet</div>'}
+      </div>
+    </div>
+    <div class="detail-col">
       <div class="section-header2">Top Holders</div>
       <table class="holder-table">
         <thead><tr><th>Rank</th><th>Address</th><th>Amount</th><th>%</th></tr></thead>
@@ -819,12 +941,6 @@ document.getElementById('detailMain').innerHTML = `
           ${t.holdersList.map((h,i)=>`<tr><td><div class="holder-rank ${i<3?'top':''}">${i+1}</div></td><td class="holder-addr">${h.addr}</td><td>${h.amt}</td><td class="holder-pct ${i===0?'accent':''}">${h.pct}%</td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--dim2);padding:20px;">No holder data</td></tr>'}
         </tbody>
       </table>
-    </div>
-    <div class="detail-col">
-      <div class="section-header2">Recent Transactions</div>
-      <div class="tx-list">
-        ${t.txs.length ? t.txs.map(tx=>`<div class="tx-item"><div style="display:flex;align-items:center;gap:8px;"><span class="tx-badge ${tx.type}">${tx.type.toUpperCase()}</span><span class="tx-amt ${tx.type}">${tx.amt}</span></div><div style="text-align:right;"><span class="tx-val">${tx.val}</span><div style="font-size:11px;color:var(--dim2);margin-top:2px;">${tx.tm}</div></div></div>`).join('') : '<div style="color:var(--dim2);padding:20px;text-align:center;">No transactions yet</div>'}
-      </div>
     </div>
   </div>
   <div class="comments-section">
@@ -899,7 +1015,7 @@ TOKENS.unshift(nt); myCreated.unshift({t:nt,created:'just now',vol:0}); selected
 alert(`$${s} launched!`); go('market');
 }
 
-function doSearch() { if(document.getElementById('page-home').classList.contains('active'))renderHome(); else if(document.getElementById('page-market').classList.contains('active')){renderSidebar();renderDetail();} }
+function doSearch() { homePage = 1; if(document.getElementById('page-home').classList.contains('active'))renderHome(); else if(document.getElementById('page-market').classList.contains('active')){renderSidebar();renderDetail();} }
 
 document.addEventListener('click',e=>{ if(e.target.classList.contains('tframe')){document.querySelectorAll('.tframe').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');} });
 window.addEventListener('hashchange',()=>{const h=window.location.hash.replace('#','')||'home';go(h);});
