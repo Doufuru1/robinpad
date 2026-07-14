@@ -528,9 +528,10 @@ input::placeholder, textarea::placeholder { color:var(--dim2); }
 <div class="form-group"><label class="form-label" data-i18n="label_name">Token Name</label><input type="text" id="tokenName" placeholder="e.g., Pepe Coin" data-placeholder-i18n="ph_name"></div>
 <div class="form-group"><label class="form-label" data-i18n="label_symbol">Token Symbol</label><input type="text" id="tokenSymbol" placeholder="e.g., PEPE" data-placeholder-i18n="ph_symbol"></div>
 <div class="form-group"><label class="form-label" data-i18n="label_desc">Description</label><textarea id="tokenDesc" placeholder="Tell us about your token..." style="min-height:100px;resize:vertical;" data-placeholder-i18n="ph_desc"></textarea></div>
-<div class="form-group"><label class="form-label" data-i18n="label_buy">Initial Buy (Optional)</label><div class="input-box"><input type="number" class="trade-inp" id="initialBuy" placeholder="0.0"><div class="trade-badge">ETH</div></div></div>
 <div class="form-group"><label class="form-label" data-i18n="label_website">Website</label><input type="text" id="tokenWebsite" placeholder="https://..." data-placeholder-i18n="ph_website"></div>
-<div class="form-group"><label class="form-label" data-i18n="label_social">Social Media</label><input type="text" id="tokenSocial" placeholder="Twitter / Telegram / Discord link" data-placeholder-i18n="ph_social"></div>
+<div class="form-group"><label class="form-label" data-i18n="label_x">X (Twitter)</label><input type="text" id="tokenX" placeholder="https://x.com/..." data-placeholder-i18n="ph_x"></div>
+<div class="form-group"><label class="form-label" data-i18n="label_tg">Telegram</label><input type="text" id="tokenTG" placeholder="https://t.me/..." data-placeholder-i18n="ph_tg"></div>
+<div class="form-group"><label class="form-label" data-i18n="label_buy">Initial Buy (Optional)</label><input type="number" id="initialBuy" placeholder="0.0" data-placeholder-i18n="ph_buy"></div>
 <button class="btn btn-accent" style="width:100%;padding:16px;font-size:16px;" onclick="createToken()" data-i18n="btn_create">Launch Token</button>
 <div class="form-hint" data-i18n="launch_hint">Your token will be created on a bonding curve and tradeable immediately. Once the market cap reaches $69K, liquidity is automatically deposited to the DEX.</div>
 </div>
@@ -625,13 +626,14 @@ const I18N = {
     hero_desc: 'Launch meme tokens in seconds with fair-launch bonding curves. No presale, no insiders.',
     btn_launch: 'LAUNCH YOUR MEME', btn_explore: 'EXPLORE TOKENS',
     stat_tokens: 'Tokens Launched', stat_vol: 'Total Volume', stat_traders: 'Active Traders', stat_grad: 'Graduated',
-    tab_trending: 'TRENDING', tab_new: 'NEW', tab_graduating: 'GRADUATING', tab_leaderboard: 'LEADERBOARD',
+    tab_trending: 'TRENDING', tab_new: 'NEW', tab_graduating: 'GRADUATING', tab_leaderboard: 'GRADUATED',
     launch_title: 'Launch Your Token', launch_sub: 'Create a meme coin in seconds. No coding required.',
     upload_text: 'Upload Token Image', upload_hint: 'PNG, JPG, GIF up to 5MB',
     label_name: 'Token Name', label_symbol: 'Token Symbol', label_desc: 'Description',
     label_buy: 'Initial Buy (Optional)', label_fee: 'Launch Fee',
-    label_website: 'Website', label_social: 'Social Media',
+    label_website: 'Website', label_x: 'X (Twitter)', label_tg: 'Telegram',
     btn_create: 'Launch Token',
+    btn_tax: 'Set Tax',
     launch_hint: 'Your token will be created on a bonding curve and tradeable immediately. Once the market cap reaches $69K, liquidity is automatically deposited to the DEX.',
     label_tokens: 'Tokens', label_value: 'Value', label_trades: 'Trades', label_earned: 'Earned',
     my_portfolio: 'My Portfolio', created_tokens: 'Created Tokens', tx_history: 'Transaction History',
@@ -653,13 +655,14 @@ const I18N = {
     hero_desc: '使用公平发射的Bonding Curve在几秒内发射Meme代币。无预售，无内部人。',
     btn_launch: '发射你的MEME', btn_explore: '探索代币',
     stat_tokens: '已发射代币', stat_vol: '总交易量', stat_traders: '活跃交易者', stat_grad: '已毕业',
-    tab_trending: '热门', tab_new: '最新', tab_graduating: '即将毕业', tab_leaderboard: '排行榜',
+    tab_trending: '热门', tab_new: '最新', tab_graduating: '即将毕业', tab_leaderboard: '已毕业',
     launch_title: '发射你的代币', launch_sub: '几秒钟内创建Meme代币。无需编码。',
     upload_text: '上传代币图片', upload_hint: 'PNG, JPG, GIF 最大5MB',
     label_name: '代币名称', label_symbol: '代币符号', label_desc: '描述',
     label_buy: '初始购买（可选）', label_fee: '发射费用',
-    label_website: '官网', label_social: '媒体链接',
+    label_website: '官网', label_x: 'X (Twitter)', label_tg: 'Telegram',
     btn_create: '发射代币',
+    btn_tax: '设置税收',
     launch_hint: '你的代币将通过Bonding Curve创建并立即可交易。市值达到$69K时，流动性将自动存入DEX。',
     label_tokens: '代币', label_value: '价值', label_trades: '交易', label_earned: '收益',
     my_portfolio: '我的持仓', created_tokens: '创建的代币', tx_history: '交易记录',
@@ -900,6 +903,7 @@ document.getElementById('detailMain').innerHTML = `
       <div class="progress-labels"><span>$${fmtN(t.mc)}</span><span>$69K</span></div>
     </div>
     <button class="btn btn-accent" style="width:100%;margin-top:16px;padding:16px;" onclick="trade()">${isBuy?'Buy':'Sell'} $${t.symbol}</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:8px;padding:12px;font-size:13px;" onclick="alert('Tax settings coming soon')" data-i18n="btn_tax">设置税收</button>
   </div>
 </div>
 
